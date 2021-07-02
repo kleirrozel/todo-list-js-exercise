@@ -1,31 +1,31 @@
-// Arrays to keep track of each task's state
-const taskTitles = [];
-const taskComplete = [];
+function newTask(title, description) {
+  const task = {
+    title: title,
+    description: description,
+    complete: false,  // A new task is false by default
 
-// Create a new task by adding to the arrays
-// A new task will be created as incomplete
-function newTask(title) {
-  taskTitles.push(title);
-  taskComplete.push(false);
-}
+    logState: function() {
+      console.log(`${this.title} has${this.complete ? " " : " not "}been completed`);
+    },
 
-// Mark a task as complete by setting the task's status in the `taskComplete` array to `true`
-function completeTask(taskIndex) {
-  taskComplete[taskIndex] = true;
-}
+    markCompleted: function() {
+      this.complete = true;
+    }
 
-// Print the state of a task to the console in a nice readable way
-function logTaskState(taskIndex) {
-  const title = taskTitles[taskIndex];
-  const complete = taskComplete[taskIndex];
-  console.log(`${title} has${complete ? " " : " not "}been completed`);
-}
+  };
+  return task; // defined as the whole content within the task variable - line 2-15
+};
 
 // DRIVER CODE BELOW
+// Create a new task by making a new variable and then add it to the variable tasks inside the array
+const task1 = newTask("Clean 🐰 Litter", "Take all the 💩 out of the litter box" );
+const task2 = newTask("Do Laundry", "😨");
+const tasks = [task1, task2];
 
-newTask("Clean Cat Litter"); // task 0
-newTask("Do Laundry"); // task 1
+task1.markCompleted(); // Since markCompleted is called before logState, when I run it, it will show has been completed
+task1.logState(); // Clean Litter has been completed
 
-logTaskState(0); // Clean Cat Litter has not been completed
-completeTask(0);
-logTaskState(0); // Clean Cat Litter has been completed
+// task1.logState(); // If logState is called before markCompleted, it will show not been completed
+// task1.markCompleted(); // Clean Litter has not been completed
+
+// console.log(tasks);
